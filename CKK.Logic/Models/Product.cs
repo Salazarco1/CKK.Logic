@@ -12,10 +12,40 @@ namespace CKK.Logic.Models
         private string _name;
         private double _price;
 
-        public Product(Product product, string name, double price) 
+        public Product(int id, string name, double price) 
         {
-            _id = product._id;
+            _id = id;
             _name = name;
+            _price = price;
+        }
+
+        public int GetId()
+        {
+            return _id;
+        }
+
+        public void SetId(int id)
+        {
+            _id=id;
+        }
+
+        public string GetName()
+        {
+            return _name;
+        }
+
+        public void SetName(string name)
+        {
+            _name = name;
+        }
+
+        public double GetPrice()
+        {
+            return _price;
+        }
+
+        public void SetPrice(double price)
+        {
             _price = price;
         }
     }
