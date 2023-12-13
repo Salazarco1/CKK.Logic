@@ -35,7 +35,7 @@ namespace CKK.Logic.Models
             return _name;
         }
 
-        public void GetName(string name)
+        public void SetName(string name)
         {
             _name = name;
         }
@@ -45,7 +45,7 @@ namespace CKK.Logic.Models
             return _adress;
         }
 
-        public void GetAdress(string adress)
+        public void SetAdress(string adress)
         {
             _adress = adress;
         }
