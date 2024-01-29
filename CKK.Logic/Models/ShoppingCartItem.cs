@@ -11,30 +11,30 @@ namespace CKK.Logic.Models
         private Product _product;
         private int _quantity;
 
-        public ShoppingCartItem(Product product, int quantity) 
+        public ShoppingCartItem(Product product, int quantity) // constructor for the class
         {
             _product = product;
             _quantity = quantity;
         }
 
-        public int GetQuantity()
+        public int GetQuantity() // gets the quantity
         {
             return _quantity;
         }
-        public void SetQuantity(int quantity)
+        public void SetQuantity(int quantity) // sets the quantity
         {
             _quantity = quantity;
         }
-        public Product GetProduct()
+        public Product GetProduct() // gets the product
         {
             return _product;
         }
-        public void SetProduct(Product product)
+        public void SetProduct(Product product) // sets the product
         {
             _product = product;
         }
 
-        public decimal GetTotal()
+        public decimal GetTotal() //calculates the total
         {
             decimal quantity = _quantity;
             decimal price = _product.GetPrice();

@@ -13,27 +13,27 @@ namespace CKK.Logic.Models
 		private string _name;
 		private string _address;
 
-		public int GetId()
+		public int GetId() // gets ID
 		{
 			return _id;
 		}
-		public void SetId(int id) 
+		public void SetId(int id) // sets ID
 		{
 			_id = id;
 		}
-		public string GetName()
+		public string GetName() // gets name
 		{
 			return _name;
 		}
-		public void SetName(string name)
+		public void SetName(string name) // sets name
 		{
 			_name = name;
 		}
-		public string GetAddress()
+		public string GetAddress() // gets address
 		{
 			return _address;
 		}
-		public void SetAddress(string address)
+		public void SetAddress(string address) // sets address
 		{
 			_address = address;
 		}
