@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CKK.Logic.Exceptions;
+using CKK.Logic.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -8,116 +10,83 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Models
 {
-    public class Store
-    {
-        private int _id;
-        private string _name;
+    public class Store : Entity, IStore
+    { 
 
-        private Product _product1;
-        private Product _product2;
-        private Product _product3;
+        public List<StoreItem> Items = new List<StoreItem>(); // creates the List
 
-        public void SetId(int id) // sets the ID
+        public StoreItem AddStoreItem(Product prod, int quantity) // adds store item
         {
-            _id = id;
-        }
-        public int GetId() // gets the ID
-        {
-            return _id;
-        }
-        public void SetName(string name) // sets name
-        {
-            _name = name;
-        }
-        public string GetName() // gets name
-        {
-            return _name;
-        }
+            if (quantity < 0) 
+            {
+                throw new InventoryItemStockTooLowException();
+            }
 
-        public Product AddStoreItem(Product prod) // adds store item
-        {
-            if (_product1 == null)
+
+            for (int i = 0; i < Items.Count; i++)
             {
-                _product1 = prod;
-                return _product1;
+
+                if (Items[i].Product.Id == prod.Id)
+                {
+                    Items[i].Quantity = Items[i].Quantity + quantity;
+                    return Items[i];
+                }
+
             }
-            else if (_product2 == null)
-            {
-                _product2 = prod;
-                return _product3;
-            }
-            else if (_product3 == null)
-            {
-                _product3 = prod;
-                return _product3;
-            }
-            else
-            {
-                return null;
-            }
+            var item = new StoreItem(prod, quantity);
+            Items.Add(item);
+            return item;
         }
-        public Product RemoveStoreItem(int productNumber) // removes store item
+        public StoreItem RemoveStoreItem(int id, int quantity) // removes store item
         {
-            if (productNumber == 1)
+            if (quantity < 0)
             {
-                _product1 = null;
-                return _product1;
+                throw new InventoryItemStockTooLowException();
             }
-            else if (productNumber == 2)
+
+            var item = FindStoreItemById(id);
+            
+            if (item == null)
             {
-                _product2 = null;
-                return _product2;
+                throw new ProductDoesNotExistException();
             }
-            else if (productNumber == 3)
+
+            for (int i = 0; i < Items.Count; i++)
             {
-                _product3 = null;
-                return _product3;
+                    if (Items[i].Product.Id == id)
+                    {
+                        Items[i].Quantity = Items[i].Quantity - quantity;
+                        if (Items[i].Quantity < 0)
+                        {
+                            Items[i].Quantity = 0;
+                        }
+                        return Items[i];
+                    }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
-        public Product GetStoreItem(int productNumber) // gets store item
+        public List<StoreItem> GetStoreItems() // gets store item
         {
-            if (productNumber == 1)
-            {
-                return _product1;
-            }
-            else if (productNumber == 2)
-            {
-                return _product2;
-            }
-            else if (productNumber == 3)
-            {
-                return _product3;
-            }
-            else if (productNumber != 1 || productNumber != 2 || productNumber != 3)
-            {
-                return null;
-            }
-            else
-            {
-                return null;
-            }
+            return Items;
         }
-        public Product FindStoreItemById(int id) // finds store item by ID
+        public StoreItem FindStoreItemById(int id) // finds store item by ID
         {
-            if (id == _product1.GetId())
+            if(id < 0)
             {
-                return _product1;
-            }
-            else if (id == _product2.GetId())
-            {
-                return _product2;
-            }
-            else if (id == _product3.GetId())
-            {
-                return _product3;
+                throw new InvalidIdException();
             }
             else
             {
-                return null;
+                var matchingId =
+                    from item in Items
+                    where item.Product.Id == id
+                    select item;
+
+                if (matchingId.Any())
+                {
+                    return matchingId.FirstOrDefault();
+                }
+                else { return null; }
             }
         }
     }
