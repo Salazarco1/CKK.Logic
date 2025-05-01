@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Exceptions
 {
+    [Serializable]
     public class ProductDoesNotExistException : Exception
     {
-        private string NewMessage = "Product or Item Does Not Exist.";
-
-        public ProductDoesNotExistException()
-        {
-            throw new Exception(NewMessage);
-        }
+        public ProductDoesNotExistException() { }
     }
 }

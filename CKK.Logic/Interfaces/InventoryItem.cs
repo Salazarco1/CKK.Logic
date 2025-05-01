@@ -8,26 +8,11 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Interfaces
 {
+    [Serializable]
     public abstract class InventoryItem
     {
-        private Product product {  get; set; }
-        private int quantity { get; set; }
-
-        public Product Product
-        {
-            get 
-            { 
-                return product; 
-            }
-            set
-            {
-                if (product != null)
-                {
-                    product = value;
-                }
-            }
-
-        }
+        public Product Product {  get; set; }
+        private int quantity;
 
         public int Quantity
         {
@@ -37,11 +22,11 @@ namespace CKK.Logic.Interfaces
             }
             set
             {
-                if(quantity > 0)
+                if(quantity >= 0)
                 {
                     quantity = value;
                 }
-                else if (quantity < 0)
+                if (quantity < 0)
                 {
                     throw new InventoryItemStockTooLowException();
                 }

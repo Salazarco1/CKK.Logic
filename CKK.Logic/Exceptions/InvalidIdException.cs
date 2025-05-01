@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Exceptions
 {
+    [Serializable]
     public class InvalidIdException : Exception
     {
-        private string NewMessage = "Id is less than 0.";
-        public InvalidIdException()
-        {
-            throw new Exception(NewMessage);
-        }
+        public InvalidIdException() { }
     }
 }

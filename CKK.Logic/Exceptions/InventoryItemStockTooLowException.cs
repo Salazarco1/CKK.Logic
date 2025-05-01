@@ -9,13 +9,9 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Exceptions
 {
+    [Serializable]
     public class InventoryItemStockTooLowException : Exception
     {
-        private string NewMessage = "Product Quantity MUST be greater than 0.";
-
-        public InventoryItemStockTooLowException() 
-        {
-            throw new Exception(NewMessage);
-        }
+        public InventoryItemStockTooLowException() { }
     }
 }

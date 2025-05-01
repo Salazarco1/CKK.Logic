@@ -4,27 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Models
 {
+    [Serializable]
     public class ShoppingCartItem : InventoryItem
     {
+        public Product Product {  get; set; }
 
-        public ShoppingCartItem(Product product, int quantity) // constructor for the class
+        public int ShoppingCartId { get; set; }
+        public int CustomerId { get; set; }
+        public int ProductId { get; set; }
+        private int quantity {  get; set; }
+        public int Quantity
         {
-            Product = product;
-            Quantity = quantity;
+            get { return quantity; }
+
+            set
+            {
+                if (value >= 0) { quantity = value; }
+                else { throw new InventoryItemStockTooLowException(); }
+            }
         }
 
-        public decimal GetTotal() //calculates the total
-        {
-            decimal quantity = Quantity;
-            decimal price = Product.Price;
-
-            decimal total = quantity * price;
-
-            return total;
-        }
-
-    }
+        public decimal GetTotal() { return Product.Price * Quantity; }
+    }   
 }
