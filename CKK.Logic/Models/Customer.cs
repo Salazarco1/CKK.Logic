@@ -10,13 +10,29 @@ using System.Threading.Tasks;
 namespace CKK.Logic.Models
 {
     [Serializable]
-    public class Customer : Entity
-	{
-		public int Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public int ShoppingCartId { get; set; }
-        public ShoppingCart Cart { get; set; }
+    /// <summary>
+    /// Represents a customer with an identifier, name, address, and associated shopping cart.
+    /// </summary>
+    public class Customer
+    {
+        /// <summary>
+        /// Gets or sets the unique identifier for the customer.
+        /// </summary>
+        public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the customer's name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the customer's address.
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
+        /// Gets or sets the shopping cart identifier associated with the customer.
+        /// </summary>
+        public int ShoppingCartId { get; set; }
     }
 }

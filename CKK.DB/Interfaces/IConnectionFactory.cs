@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace CKK.DB.Interfaces
 {
-    public interface IConnectionFactory
+    /// <summary>
+    /// Provides a factory for creating and managing database connections.
+    /// Implements IDisposable to allow proper resource cleanup.
+    /// </summary>
+    public interface IConnectionFactory : IDisposable
     {
+        /// <summary>
+        /// Gets a database connection instance.
+        /// </summary>
         IDbConnection GetConnection { get; }
     }
 }

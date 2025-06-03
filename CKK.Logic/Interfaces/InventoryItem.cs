@@ -8,12 +8,22 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Interfaces
 {
-    [Serializable]
+    /// <summary>
+    /// Represents an inventory item that contains product details and quantity management.
+    /// </summary>
     public abstract class InventoryItem
     {
-        public Product Product {  get; set; }
+        /// <summary>
+        /// Gets or sets the associated product of the inventory item.
+        /// </summary>
+        public Product Product { get; set; }
+
         private int quantity;
 
+        /// <summary>
+        /// Gets or sets the quantity of the inventory item.
+        /// Ensures that quantity is non-negative, throwing an exception if below zero.
+        /// </summary>
         public int Quantity
         {
             get
@@ -22,7 +32,7 @@ namespace CKK.Logic.Interfaces
             }
             set
             {
-                if(quantity >= 0)
+                if (quantity >= 0)
                 {
                     quantity = value;
                 }

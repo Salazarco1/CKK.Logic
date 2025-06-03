@@ -7,8 +7,15 @@ using CKK.Logic.Models;
 
 namespace CKK.DB.Interfaces
 {
+    /// <summary>
+    /// Defines database operations specific to orders.
+    /// Inherits generic CRUD functionality from IGenericRepository.
+    /// </summary>
     public interface IOrderRepository : IGenericRepository<Order>
     {
+        /// <summary>
+        /// Retrieves an order associated with a specific customer identifier.
+        /// </summary>
         Order GetOrderByCustomerId(int id);
     }
 }
